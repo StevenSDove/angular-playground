@@ -1,45 +1,31 @@
 import { Injectable } from '@angular/core';
 
+const { log, debug, info, warn, error } = console;
+
 @Injectable({
   providedIn: 'root',
 })
 export class LoggingService {
-  log = (level: LogLevel, ...params: any[]): void => {
-    const { log, debug, info, warn, error } = console;
-    let logger: Function = info;
-    switch (level) {
-      case LogLevel.debug:
-        logger = debug;
-        break;
-      case LogLevel.info:
-        logger = info;
-        break;
-      case LogLevel.warning:
-        logger = warn;
-        break;
-      case LogLevel.error:
-        logger = error;
-        break;
-    }
-    logger(...params);
-  };
-  debug(...params: any[]): void {
-    this.log(LogLevel.debug, ...params);
+  log(level: LogLevel, ...data: any[]): void {
+    console[level](...data);
   }
-  info(...params: any[]): void {
-    this.log(LogLevel.info, ...params);
+  debug(...data: any[]): void {
+    this.log(LogLevel.debug, ...data);
   }
-  warning(...params: any[]): void {
-    this.log(LogLevel.warning, ...params);
+  info(...data: any[]): void {
+    this.log(LogLevel.info, ...data);
   }
-  error(...params: any[]): void {
-    this.log(LogLevel.error, ...params);
+  warning(...data: any[]): void {
+    this.log(LogLevel.warning, ...data);
+  }
+  error(...data: any[]): void {
+    this.log(LogLevel.error, ...data);
   }
 }
 
 export enum LogLevel {
-  'debug',
-  'info',
-  'warning',
-  'error',
+  debug = 'debug',
+  info = 'info',
+  warning = 'warn',
+  error = 'error',
 }

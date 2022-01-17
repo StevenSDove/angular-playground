@@ -17,12 +17,12 @@ export class ProductService {
   getProducts(): Observable<IProduct[]> {
     return this.$http.get<IProduct[]>(this.productUrl).pipe(
       tap((data) => this.log.info('All: ', JSON.stringify(data))),
-      catchError(this.handleError)
+      catchError(this.handleError.bind(this))
     );
   }
 
   private handleError(err: HttpErrorResponse) {
-    let errorMessage = '';
+    let errorMessage: string = '';
     if (err.error instanceof ErrorEvent) {
       // client-side or network error.
       errorMessage = `An error occurred: ${err.error.message}`;
@@ -30,7 +30,9 @@ export class ProductService {
       // Unsuccessful reponse code from backend.
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
+    console.log('hi');
     this.log.error(errorMessage);
+    console.log('again');
     return throwError(() => new Error(errorMessage));
   }
 }
