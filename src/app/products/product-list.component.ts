@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduct } from './products';
 
 @Component({
@@ -6,12 +6,12 @@ import { IProduct } from './products';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
   pageTitle: string = 'Product List';
   imageWidth: number = 50;
   imageMargin: number = 2;
   imageSrcPrefix: string =
-    'https://stackblitz.com/files/sdove-angular-playground/github/StevenSDove/angular-playground/master/src/';
+  'https://stackblitz.com/files/sdove-angular-playground/github/StevenSDove/angular-playground/master/src/';
   showImage: boolean = false;
   listFilter: string = 'cart';
   products: IProduct[] = [
@@ -36,8 +36,12 @@ export class ProductListComponent {
       imageUrl: 'assets/images/hammer.png',
     },
   ];
-
+  
   toggleImage(): void {
     this.showImage = !this.showImage;
+  }
+
+  ngOnInit(): void {
+    console.log('ProductListComponent is initialized');  
   }
 }
