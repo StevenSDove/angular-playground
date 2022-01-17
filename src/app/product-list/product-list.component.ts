@@ -6,9 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
-  pageTitle:    = 'Product List';
-  imageWidth: number = 50;
-  imageMargin: number = 2;
+  pageTitle = 'Product List';
+  imageWidth = 50;
+  imageMargin = 2;
+  imageSrcPrefix = 'https://stackblitz.com/files/sdove-angular-playground/github/StevenSDove/angular-playground/master/src/';
+  showImage: boolean = false;
   products: any[] = [
     {
       productId: 2,
@@ -31,4 +33,8 @@ export class ProductListComponent {
       imageUrl: 'assets/images/hammer.png',
     },
   ];
+
+  toggleImage(): void {
+    this.showImage = !this.showImage;
+  }
 }
