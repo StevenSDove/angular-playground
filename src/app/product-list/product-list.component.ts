@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
-  pageTitle: string = 'Product List';
+  pageTitle:    = 'Product List';
+  imageWidth: number = 50;
+  imageMargin: number = 2;
   products: any[] = [
     {
       productId: 2,

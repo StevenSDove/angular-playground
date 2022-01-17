@@ -29,10 +29,17 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of products">
-          <td></td>
+          <td>
+            <img 
+              [src]='product.imageUrl'
+              [title]='product.productName'
+              [style.width.px]='imageWidth'
+              [style.margin.px]='imageMargin'  
+            >
+          </td>
           <td>{{ product.productName }}</td>
           <td>{{ product.productCode }}</td>
-          <td>{{ product.productDate }}</td>
+          <td>{{ product.releaseDate }}</td>
           <td>{{ product.price }}</td>
           <td>{{ product.starRating }}</td>
         </tr>
