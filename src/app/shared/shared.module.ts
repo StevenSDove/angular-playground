@@ -7,7 +7,7 @@ import { ConvertToSpacesPipe } from './convert-to-spaces';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [AddUrlPrefixPipe, StarComponent],
+  declarations: [AddUrlPrefixPipe, StarComponent, ConvertToSpacesPipe],
   exports: [
     AddUrlPrefixPipe,
     ConvertToSpacesPipe,
