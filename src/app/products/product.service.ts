@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
-import { AddUrlPrefixPipe } from '../shared/add-url-prefix';
 import { LoggingService } from '../shared/logging.service';
 import { IProduct } from './products';
 
@@ -10,21 +9,16 @@ import { IProduct } from './products';
   providedIn: 'root',
 })
 export class ProductService {
-  private _productUrl: string = 'api/products/products.json';
+  private productUrl: string =
+    'https://my-json-server.typicode.com/sdove/angular-playground/master/products';
 
-  constructor(
-    private http: HttpClient,
-    private urlPipe: AddUrlPrefixPipe,
-    private log: LoggingService
-  ) {}
+  constructor(private $http: HttpClient, private log: LoggingService) {}
 
   getProducts(): Observable<IProduct[]> {
-    return this.http
-      .get<IProduct[]>(this.urlPipe.transform(this._productUrl))
-      .pipe(
-        tap((data) => this.log.info('All: ', JSON.stringify(data))),
-        catchError(this.handleError)
-      );
+    return this.$http.get<IProduct[]>(this.productUrl).pipe(
+      tap((data) => this.log.info('All: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(err: HttpErrorResponse) {

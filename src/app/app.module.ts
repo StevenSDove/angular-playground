@@ -12,10 +12,10 @@ import { AddUrlPrefixPipe } from './shared/add-url-prefix';
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule],
   declarations: [
-    AppComponent,
-    ProductListComponent,
     ConvertToSpacesPipe,
     AddUrlPrefixPipe,
+    AppComponent,
+    ProductListComponent,
     StarComponent,
   ],
   bootstrap: [AppComponent],

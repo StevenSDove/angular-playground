@@ -4,36 +4,39 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LoggingService {
-  log(level: LogLevel, ...message: any[]): void {
-    const { log, debug, info, warn, error } = console;
-    let logger = log;
-    switch (level) {
-      case LogLevel.debug:
-        logger = debug;
-        break;
-      case LogLevel.info:
-        logger = info;
-        break;
-      case LogLevel.warning:
-        logger = warn;
-        break;
-      case LogLevel.error:
-        logger = error;
-        break;
-    }
-    logger(...message);
+  private _log: Function;
+  constructor() {
+    this._log = (level: LogLevel, ...params: any[]): void => {
+      const { debug, info, warn, error } = console;
+      let logger: Function = info;
+      switch (level) {
+        case LogLevel.debug:
+          logger = debug;
+          break;
+        case LogLevel.info:
+          logger = info;
+          break;
+        case LogLevel.warning:
+          logger = warn;
+          break;
+        case LogLevel.error:
+          logger = error;
+          break;
+      }
+      logger(...params);
+    };
   }
-  debug(...message: any[]): void {
-    this.log(LogLevel.debug, ...message);
+  debug(...params: any[]): void {
+    this._log(LogLevel.debug, ...params);
   }
-  info(...message: any[]): void {
-    this.log(LogLevel.info, ...message);
+  info(...params: any[]): void {
+    this._log(LogLevel.info, ...params);
   }
-  warning(...message: any[]): void {
-    this.log(LogLevel.warning, ...message);
+  warning(...params: any[]): void {
+    this._log(LogLevel.warning, ...params);
   }
-  error(...message: any[]): void {
-    this.log(LogLevel.error, ...message);
+  error(...params: any[]): void {
+    this._log(LogLevel.error, ...params);
   }
 }
 
