@@ -18,7 +18,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   imageWidth: number = 50;
   imageMargin: number = 2;
   showImage: boolean = false;
-  subs: Subscription[];
+  sub: Subscription;
 
   private _listFilter: string = '';
   get listFilter(): string {
@@ -53,16 +53,14 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.push(
-      this.productService.getProducts().subscribe({
-        next: (products) => this.addProducts(products),
-        error: (err) => this.log.error(err),
-      })
-    );
+    this.sub = this.productService.getProducts().subscribe({
+      next: (products) => this.addProducts(products),
+      error: (err) => this.log.error(err),
+    });
   }
 
   ngOnDestroy(): void {
-    this.subs.forEach((sub) => sub.unsubscribe());
+    this.sub.unsubscribe();
   }
 
   onRatingClicked(rating: number): void {
