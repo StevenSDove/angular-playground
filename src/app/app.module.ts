@@ -10,9 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddUrlPrefixPipe } from './shared/add-url-prefix';
 import { ProductDetailComponent } from './products/product-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, HttpClientModule],
   declarations: [
     ConvertToSpacesPipe,
     AddUrlPrefixPipe,
@@ -21,6 +21,18 @@ import { WelcomeComponent } from './home/welcome.component';
     ProductDetailComponent,
     WelcomeComponent,
     StarComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: 'products', component: ProductListComponent },
+      { path: 'products/:id', component: ProductDetailComponent },
+      { path: 'welcome', component: WelcomeComponent },
+      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
+      { path: '**', redirectTo: 'welcome', pathMatch: 'full' },
+    ]),
   ],
   bootstrap: [AppComponent],
 })
