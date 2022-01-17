@@ -10,7 +10,7 @@ import { IProduct } from './products';
 })
 export class ProductService {
   private productUrl: string =
-    'https://my-json-server.typicode.com/sdove/angular-playground/master/products';
+    'https://my-json-server.typicode.com/StevenSDove/angular-playground/products';
 
   constructor(private $http: HttpClient, private log: LoggingService) {}
 
@@ -30,9 +30,7 @@ export class ProductService {
       // Unsuccessful reponse code from backend.
       errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
     }
-    console.log('hi');
     this.log.error(errorMessage);
-    console.log('again');
     return throwError(() => new Error(errorMessage));
   }
 }
