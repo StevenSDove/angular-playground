@@ -65,4 +65,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     console.log('ProductListComponent is initialized');
   }
+
+  onRatingClicked(rating: number): void {
+    console.log('rating clicked', rating);
+  }
 }
