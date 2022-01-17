@@ -8,6 +8,8 @@ import { ConvertToSpacesPipe } from './shared/convert-to-spaces';
 import { StarComponent } from './shared/star.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddUrlPrefixPipe } from './shared/add-url-prefix';
+import { ProductDetailComponent } from './products/product-detail.component';
+import { WelcomeComponent } from './home/welcome.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, HttpClientModule],
@@ -16,6 +18,8 @@ import { AddUrlPrefixPipe } from './shared/add-url-prefix';
     AddUrlPrefixPipe,
     AppComponent,
     ProductListComponent,
+    ProductDetailComponent,
+    WelcomeComponent,
     StarComponent,
   ],
   bootstrap: [AppComponent],
