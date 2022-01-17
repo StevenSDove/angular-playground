@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoggingService } from '../shared/logging.service';
 import { ProductService } from './product.service';
 import { IProduct } from './products';
 
@@ -8,12 +9,13 @@ import { IProduct } from './products';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private log: LoggingService
+  ) {}
   pageTitle: string = 'Product List';
   imageWidth: number = 50;
   imageMargin: number = 2;
-  imageSrcPrefix: string =
-    'https://stackblitz.com/files/sdove-angular-playground/github/StevenSDove/angular-playground/master/src/';
   showImage: boolean = false;
 
   private _listFilter: string = '';
@@ -43,14 +45,19 @@ export class ProductListComponent implements OnInit {
       : this.products;
   }
 
+  addProducts(newProducts: IProduct[]): void {
+    this.products = [...this.products, ...newProducts];
+    this.filteredProducts = this.performFilter(this.listFilter);
+  }
+
   ngOnInit(): void {
-    setTimeout(() => {
-      this.products = this.productService.getProducts();
-      this.filteredProducts = this.performFilter(this.listFilter);
-    }, 5000);
+    this.productService.getProducts().subscribe({
+      next: (products) => this.addProducts(products),
+      error: (err) => this.log.error(err),
+    });
   }
 
   onRatingClicked(rating: number): void {
-    console.log('rating clicked', rating);
+    this.log.info('rating clicked', rating);
   }
 }
