@@ -20,7 +20,7 @@ export class ProductListComponent implements OnInit {
   }
   set listFilter(value: string) {
     this._listFilter = value;
-    console.log('In setter', value);
+    this.filteredProducts = this.performFilter(value);
   }
 
   products: IProduct[] = [
@@ -45,9 +45,21 @@ export class ProductListComponent implements OnInit {
       imageUrl: 'assets/images/hammer.png',
     },
   ];
+  filteredProducts: IProduct[] = [...this.products];
 
   toggleImage(): void {
     this.showImage = !this.showImage;
+  }
+
+  performFilter(filterBy: string): IProduct[] {
+    const caseInsensitiveFilterBy = filterBy.toLocaleUpperCase();
+    return filterBy.length
+      ? this.products.filter((product: IProduct) =>
+          product.productName
+            .toLocaleUpperCase()
+            .includes(caseInsensitiveFilterBy)
+        )
+      : this.products;
   }
 
   ngOnInit(): void {
