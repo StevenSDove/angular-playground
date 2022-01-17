@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IProduct } from './products';
 
 @Component({
   selector: 'pm-products',
@@ -6,20 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent {
-  pageTitle = 'Product List';
-  imageWidth = 50;
-  imageMargin = 2;
-  imageSrcPrefix = 'https://stackblitz.com/files/sdove-angular-playground/github/StevenSDove/angular-playground/master/src/';
+  pageTitle: string = 'Product List';
+  imageWidth: number = 50;
+  imageMargin: number = 2;
+  imageSrcPrefix: string =
+    'https://stackblitz.com/files/sdove-angular-playground/github/StevenSDove/angular-playground/master/src/';
   showImage: boolean = false;
   listFilter: string = 'cart';
-  products: any[] = [
+  products: IProduct[] = [
     {
       productId: 2,
       productName: 'Garden Cart',
       productCode: 'GDN-0023',
       releaseDate: 'March 18, 2021',
-      description: '15 gallon capacity rolling garden cart',
       price: 32.99,
+      description: '15 gallon capacity rolling garden cart',
       starRating: 4.2,
       imageUrl: 'assets/images/garden_cart.png',
     },
@@ -28,8 +30,8 @@ export class ProductListComponent {
       productName: 'Hammer',
       productCode: 'TBX-0048',
       releaseDate: 'May 21, 2021',
-      description: 'Curved claw steel hammer',
       price: 8.9,
+      description: 'Curved claw steel hammer',
       starRating: 4.8,
       imageUrl: 'assets/images/hammer.png',
     },
