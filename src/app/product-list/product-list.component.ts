@@ -11,6 +11,7 @@ export class ProductListComponent {
   imageMargin = 2;
   imageSrcPrefix = 'https://stackblitz.com/files/sdove-angular-playground/github/StevenSDove/angular-playground/master/src/';
   showImage: boolean = false;
+  listFilter: string = 'cart';
   products: any[] = [
     {
       productId: 2,
